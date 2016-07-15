@@ -1,0 +1,8 @@
+@model WebApplication.Models.Player
+
+<h1>Add New Player</h1>
+
+<form asp-action="create" asp-controller="player">
+    @Html.EditorForModel()
+    <input type="submit" value="Add Player" />
+</form>
