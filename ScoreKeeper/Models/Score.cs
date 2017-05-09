@@ -1,13 +1,13 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication.Models 
+namespace ScoreKeeper.Models
 {
     public class Score
     {
         public virtual int Id { get; set; }
         public virtual Player Player { get; set; }
         [Required]
-        [Range(0,25)]
+        [Range(0, 25)]
         public virtual int Value { get; set; }
     }
 }

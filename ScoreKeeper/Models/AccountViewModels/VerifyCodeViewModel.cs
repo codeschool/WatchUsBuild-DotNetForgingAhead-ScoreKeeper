@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication.Models.AccountViewModels
+namespace ScoreKeeper.Models.AccountViewModels
 {
     public class VerifyCodeViewModel
     {

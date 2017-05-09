@@ -1,11 +1,13 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using WebApplication.Data;
 
-namespace WebApplication.Data.Migrations
+namespace ScoreKeeper.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
@@ -14,7 +16,8 @@ namespace WebApplication.Data.Migrations
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20901");
+                .HasAnnotation("ProductVersion", "1.0.0-rc3")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
@@ -123,7 +126,7 @@ namespace WebApplication.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebApplication.Models.ApplicationUser", b =>
+            modelBuilder.Entity("ScoreKeeper.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -166,6 +169,7 @@ namespace WebApplication.Data.Migrations
                         .HasName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
+                        .IsUnique()
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
@@ -174,23 +178,23 @@ namespace WebApplication.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
-                        .WithMany()
+                        .WithMany("Claims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("WebApplication.Models.ApplicationUser")
-                        .WithMany()
+                    b.HasOne("ScoreKeeper.Models.ApplicationUser")
+                        .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("WebApplication.Models.ApplicationUser")
-                        .WithMany()
+                    b.HasOne("ScoreKeeper.Models.ApplicationUser")
+                        .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -198,12 +202,12 @@ namespace WebApplication.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("WebApplication.Models.ApplicationUser")
-                        .WithMany()
+                    b.HasOne("ScoreKeeper.Models.ApplicationUser")
+                        .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

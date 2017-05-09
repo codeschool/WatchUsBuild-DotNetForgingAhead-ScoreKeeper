@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ScoreKeeper.Data;
+using ScoreKeeper.Models;
 using Microsoft.EntityFrameworkCore;
-using WebApplication.Data;
-using WebApplication.Models;
 
-namespace WebApplication.Controllers
+namespace ScoreKeeper.Controllers
 {
     public class PlayerController : Controller
     {
@@ -41,15 +38,16 @@ namespace WebApplication.Controllers
 
         public IActionResult Details(int id)
         {
-            var model =_context.Players.Include(e => e.Scores).FirstOrDefault(e => e.Id == id);
+            var model = _context.Players.Include(e => e.Scores).FirstOrDefault(e => e.Id == id);
             @ViewData["Title"] = @model.Name;
             return View(model);
         }
 
-        public IActionResult AddScore(int id, int value) {
-            _context.Players.FirstOrDefault(e => e.Id == id).Scores.Add(new Score{Value = value});
+        public IActionResult AddScore(int id, int value)
+        {
+            _context.Players.FirstOrDefault(e => e.Id == id).Scores.Add(new Score { Value = value });
             _context.SaveChanges();
-            return RedirectToAction("Details","Player", new {Id = id});
+            return RedirectToAction("Details", "Player", new { Id = id });
         }
     }
 }

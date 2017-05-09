@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication.Models.ManageViewModels
+namespace ScoreKeeper.Models.ManageViewModels
 {
     public class FactorViewModel
     {

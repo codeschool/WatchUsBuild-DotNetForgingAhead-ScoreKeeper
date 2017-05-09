@@ -1,4 +1,4 @@
-@model WebApplication.Models.Player
+﻿@model WebApplication.Models.Player
 
 <h1>@Model.Name</h1>
 
@@ -7,11 +7,12 @@
 <h2>Scores</h2>
 <form asp-action="addscore" asp-controller="player" asp-route-id="@Model.Id">
     <input type="number" name="value" id="value" />
-    <input type="submit" value="Add new score"/>
+    <input type="submit" value="Add new score" />
 </form>
 
 <ul>
-    @foreach(var score in Model.Scores) {
+    @foreach (var score in Model.Scores)
+    {
         <li>@score.Value</li>
     }
 </ul>
