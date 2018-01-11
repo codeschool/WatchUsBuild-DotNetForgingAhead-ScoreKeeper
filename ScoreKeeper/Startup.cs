@@ -65,15 +65,15 @@ namespace ScoreKeeper
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+            }
 
-                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                     .CreateScope())
-                {
-                    serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
-                            .Database.EnsureDeleted();
-                    serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
-                            .Database.EnsureCreated();
-                }
+            {
+                serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
+                        .Database.EnsureDeleted();
+                serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
+                        .Database.EnsureCreated();
             }
 
             app.UseStaticFiles();
